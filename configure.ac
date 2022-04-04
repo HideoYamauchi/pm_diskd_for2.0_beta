@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.53])
-AC_INIT([pm_diskd], [2.4], [iidayuus@intellilink.co.jp])
+AC_INIT([pm_diskd], [2.5], [yamauchi@intellilink.co.jp])
 AM_INIT_AUTOMAKE
 
 # Checks for programs.
@@ -80,17 +80,19 @@ if test x"$have_gthread" = xyes; then
 	LIBS="$LIBS $GTHREAD_LIBS"
 fi
 
-PKG_CHECK_MODULES([PACEMAKER], [pacemaker >= 1.1.13],
-	AC_DEFINE_UNQUOTED([PACEMAKER_GE_1113], 1),
-	AC_DEFINE_UNQUOTED([PACEMAKER_GE_1113], 0))
-
-PKG_CHECK_MODULES([CHECK_ATTRD_UPDATE_BOTH], [pacemaker >= 1.1.15],
-	AC_DEFINE_UNQUOTED([ATTRD_UPDATE_BOTH], 1),
-	AC_DEFINE_UNQUOTED([ATTRD_UPDATE_BOTH], 0))
+#PKG_CHECK_MODULES([PACEMAKER], [pacemaker >= 1.1.13],
+#	AC_DEFINE_UNQUOTED([PACEMAKER_GE_1113], 1),
+#	AC_DEFINE_UNQUOTED([PACEMAKER_GE_1113], 0))
+#
+#PKG_CHECK_MODULES([CHECK_ATTRD_UPDATE_BOTH], [pacemaker >= 1.1.15],
+#	AC_DEFINE_UNQUOTED([ATTRD_UPDATE_BOTH], 1),
+#	AC_DEFINE_UNQUOTED([ATTRD_UPDATE_BOTH], 0))
 
 dnl ========================================================================
 dnl Headers
 dnl ========================================================================
+
+AC_CHECK_HEADERS([getopt.h])
 
 AC_CHECK_HEADER([pacemaker/crm_config.h])
 
@@ -108,10 +110,10 @@ if test "$ac_cv_header_pacemaker_crm_config_h" = "yes"; then
 	CFLAGS="$CFLAGS -I${prefix}/include/pacemaker"
 fi
 
-SUPPORT_HEARTBEAT=`extract_header_define_int crm_config.h SUPPORT_HEARTBEAT`
-if test "x$SUPPORT_HEARTBEAT" = x"1"; then
-	CFLAGS="$CFLAGS -I${prefix}/include/heartbeat"
-fi
+#SUPPORT_HEARTBEAT=`extract_header_define_int crm_config.h SUPPORT_HEARTBEAT`
+#if test "x$SUPPORT_HEARTBEAT" = x"1"; then
+#	CFLAGS="$CFLAGS -I${prefix}/include/heartbeat"
+#fi
 
 OCF_ROOT_DIR=`extract_header_define crm/services.h OCF_ROOT_DIR`
 AC_SUBST(OCF_ROOT_DIR)

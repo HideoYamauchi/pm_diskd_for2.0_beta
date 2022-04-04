@@ -22,13 +22,13 @@ License: GPL
 Vendor: NIPPON TELEGRAPH AND TELEPHONE CORPORATION
 BuildRoot: %{_tmppath}/%{name}-%{version}
 BuildRequires: autoconf, automake
-BuildRequires: pacemaker-libs-devel >= 1.1.8
-Requires: pacemaker-libs >= 1.1.8
+BuildRequires: pacemaker-libs-devel >= 2.1.0
+Requires: pacemaker-libs >= 2.1.0
 
 ########################################
 %description
 pacemaker diskcheck service
- for pacemaker 1.1.8 
+ for pacemaker 2.1.0
 
 ########################################
 %prep
