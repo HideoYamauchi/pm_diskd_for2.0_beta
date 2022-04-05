@@ -159,7 +159,7 @@ diskd_start() {
 	exit $OCF_SUCCESS
     fi
     
-    ocf_log err "Could not run $diskd_cmd : rc=$rc"
+    ocf_exit_reason "Could not run $diskd_cmd : " $rc
     exit $OCF_ERR_GENERIC
 }
 
@@ -183,7 +183,7 @@ diskd_stop() {
 	    del_attr_exit $OCF_SUCCESS
 	fi
 
-	ocf_log err "Unexpected result from kill -TERM $pid: $rc"
+	ocf_exit_reason "Unexpected result from kill -TERM $pid: " $rc
 	del_attr_exit $OCF_ERR_GENERIC
     fi
     del_attr_exit $OCF_SUCCESS
@@ -208,7 +208,7 @@ diskd_monitor() {
     	if [ $rc = 0 ]; then
 	    return $OCF_SUCCESS
     	fi
-    	ocf_log err "Could not run $diskd_cmd : rc=$rc"
+	ocf_exit_reason "Could not run $diskd_cmd : rc=" $rc
     	return $OCF_ERR_GENERIC
     fi
 
@@ -236,7 +236,7 @@ diskd_validate() {
     if ocf_is_decimal "$OCF_RESKEY_interval" && [ $OCF_RESKEY_interval -gt 0 ]; then
 	:
     else
-	ocf_log err "Invalid interval $OCF_RESKEY_interval. It should be positive integer!"
+	ocf_exit_reason "Invalid interval $OCF_RESKEY_interval. It should be positive integer!"
 	exit $OCF_ERR_ARGS
     fi
 
