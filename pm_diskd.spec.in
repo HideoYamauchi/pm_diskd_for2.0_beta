@@ -22,8 +22,8 @@ License: GPL
 Vendor: NIPPON TELEGRAPH AND TELEPHONE CORPORATION
 BuildRoot: %{_tmppath}/%{name}-%{version}
 BuildRequires: autoconf, automake
-BuildRequires: pacemaker-libs-devel >= 2.0.4
-Requires: pacemaker-libs >= 2.0.4
+BuildRequires: pacemaker-libs-devel >= 2.0.5
+Requires: pacemaker-libs >= 2.0.5
 
 ########################################
 %description
